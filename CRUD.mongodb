@@ -1,0 +1,157 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// The current database to use.
+use('fd_mongo_db');
+db.inventory.insertOne({
+  name: 1234
+})
+//
+use('fd_mongo_db');
+db.inventory.find({
+  qty: {
+    $lt: 80,
+    $gt: 50
+  }
+})
+//
+use('fd_mongo_db');
+db.inventory.find({
+  'size.h' : {
+    $gt: 10
+  }
+})
+//
+use('fd_mongo_db');
+db.inventory.find({
+  $or: [
+    {status: "D"},
+    {qty: {
+      $lte: 30
+    }}
+  ]
+})
+//
+use('fd_mongo_db');
+db.inventory.find({
+  $or: [
+    {"size.uom": "cm"},
+    { $and: [
+      {"status": "D"},
+      {qty: { $gte: 80}}
+    ]}
+  ]
+})
+//
+use('fd_mongo_db');
+db.inventory.updateMany({
+  status: "A"
+}, {
+  $set: {status: "accepted"}
+})
+// delete
+use('fd_mongo_db');
+db.users.deleteMany({
+  firstName: {$exists: true},
+  lastName: {$exists: true},
+  age: {$exists: true}
+})
+//
+use('fd_mongo_db');
+db.test2.drop()
+//
+use('fd_mongo_db');
+db.createCollection('phones',{
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ['model', 'price', 'amount', 'brand', 'specs'],
+      properties: {
+        model: {
+          bsonType: 'string',
+        },
+        price: {
+          bsonType: 'number'
+        },
+        amount: {
+          bsonType: 'int'
+        },
+        brand: {
+          bsonType: 'string',
+        },
+        specs: {
+          bsonType: "object",
+          required: ['cpu', 'ram', 'storage'],
+          properties: {
+            cpu: {
+              bsonType: 'string',
+            },
+            ram: {
+              bsonType: 'number'
+            },
+             storage: {
+              bsonType: 'number'
+            },
+          }
+        },
+        lastArrival: {
+          bsonType:"date"
+        }
+      }
+
+    }
+  }
+})
+
+use('fd_mongo_db');
+db.phones.insertOne({
+  name: 'test'
+})
+
+
+db.phones.insertMany([
+  {
+    model: 'XZF-5000', 
+    brand: 'bPhone',
+    amount: 500,
+    price: 7499.99,
+    specs: {
+      cpu: 'bestCPU 4GHz',
+      ram: 8,
+      storage: 256
+    }
+  },
+  {
+    model: 'XZF-5001', 
+    brand: 'bPhone',
+    amount: 1500,
+    price: 17499.99,
+    specs: {
+      cpu: 'bestCPU 4.001GHz',
+      ram:9,
+      storage: 257
+    }
+  },
+  {
+    model: 'Plus', 
+    brand: 'Test',
+    amount: 8000,
+    price: 2500,
+    specs: {
+      cpu: 'abc',
+      ram: 4,
+      storage: 32
+    }
+  },
+  {
+    model: 'test', 
+    brand: 'test',
+    amount: 5500,
+    price: 54645,
+    specs: {
+      cpu: '5ghz',
+      ram: 12,
+      storage: 125
+    }
+  },
+])
