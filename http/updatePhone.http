@@ -1,0 +1,9 @@
+PATCH http://localhost:3000/6197b859b534acc561bad6ba
+Content-Type: application/json
+
+{
+  "brand": "New 2",
+  "model": "New 2",
+  "price": 9999999,
+  "amount": 100
+}
