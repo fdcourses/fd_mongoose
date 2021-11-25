@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 const yup = require('yup');
 
 const DB_NAME = process.env.DB_NAME || 'fd_mongoose';
+const DB_HOST = 'fd_mongo_db';
+const PORT = process.env.PORT || 9999;
 
-mongoose.connect(`mongodb://localhost:27017/${DB_NAME}`).catch((err) => {
+mongoose.connect(`mongodb://${DB_HOST}:27017/${DB_NAME}`).catch((err) => {
   console.log(err);
   process.exit(1);
 });
@@ -17,7 +19,6 @@ const phoneSpecsChema = yup.object().shape({
   storage: yup.number().min(1).required(),
 });
 
-const PORT = process.env.PORT || 3000;
 
 const phoneSchema = new mongoose.Schema({
   brand: {

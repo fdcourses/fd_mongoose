@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  mongoose-server:
+    build: 
+      context: ./
+    ports:
+      - 8000:3000
+    environment:
+      PORT: 3000
+    volumes:
+      - ~/Documents/VSCode_Projects/lections/mongoose:/server:ro
+    depends_on:
+      - fd_mongo_db
+    networks:
+      - test-network
+
+  fd_mongo_db:
+    image: mongo:focal
+    restart: always
+    volumes:
+      - ~/mongoBackup:/data/db
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    name: 'dont_rename'
